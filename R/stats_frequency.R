@@ -7,12 +7,13 @@
 #' @return Data frame containing stats.
 #' @export
 #'
-#' @importFrom rlang quos as_name syms sym
+#' @importFrom rlang quos as_name syms sym .data
 #' @importFrom purrr map as_vector
 #' @importFrom dplyr group_by summarize n cur_group_rows left_join mutate select rename bind_rows
 #' @importFrom tibble tibble
 #'
 #' @examples
+#' library(ggplot2)
 #' data("diamonds")
 #' ds_stats <- stats_frequency(diamonds)
 #' ds_stats <- stats_frequency(diamonds, color)
@@ -60,8 +61,8 @@ stats_frequency <- function(data, ..., .select_function = is.factor) {
       if (!is.null(vars_groupped)) {
         data_local <- data_local %>%
           dplyr::left_join(data_counts) %>%
-          dplyr::mutate(freq = (n/total) * 100) %>%
-          dplyr::select(-total)
+          dplyr::mutate(freq = (n/.data$total) * 100) %>%
+          dplyr::select(-.data$total)
       } else {
         data_local <- data_local %>%
           dplyr::mutate(freq = (n/n_rows) * 100)
@@ -72,7 +73,7 @@ stats_frequency <- function(data, ..., .select_function = is.factor) {
     data_local <- data_local %>%
       dplyr::mutate(variable = selected_variable, .before = rlang::sym(selected_variable)) %>%
       dplyr::rename(value = rlang::sym(selected_variable)) %>%
-      dplyr::mutate(value = as.character(value))
+      dplyr::mutate(value = as.character(.data$value))
 
 
     if (nrow(stat_data) == 0){

@@ -8,12 +8,15 @@
 #' @return Data frame containing stats.
 #' @export
 #'
-#' @importFrom rlang abort is_null is_list is_named quos
+#' @importFrom rlang abort is_null is_list is_named quos .data
 #' @importFrom purrr map map_lgl as_vector
-#' @importFrom dplyr across all_of group_by summarise
+#' @importFrom dplyr across all_of group_by summarise n
 #' @importFrom tidyr pivot_longer separate pivot_wider
+#' @import utils
 #'
 #' @examples
+#' library(ggplot2)
+#' library(dplyr)
 #' data("diamonds")
 #' ds_stats <- stats_numeric(diamonds)
 #' stats_to_calculate <- list(n = ~ n(), mean = ~ mean(.x, na.rm = TRUE), sd = ~ sd(.x, na.rm = TRUE))
@@ -63,15 +66,15 @@ stats_numeric <- function(data, ..., stats_to_calculate = NULL, .select_function
 
   data <- data %>%
     dplyr::summarise(
-      dplyr::across(tidyselect:::where(.select_function),
+      dplyr::across(where(.select_function),
              stats_to_calculate,
              .names = "{.col}:{.fn}"
       )
     )
 
   data <- data %>%
-    tidyr::pivot_longer(cols = tidyselect:::where(is.numeric)) %>%
-    tidyr::separate(name,
+    tidyr::pivot_longer(cols = where(is.numeric)) %>%
+    tidyr::separate(.data$name,
                     c("column", "statistics"),
                     sep = ":") %>%
     tidyr::pivot_wider(names_from = "statistics",
@@ -79,3 +82,5 @@ stats_numeric <- function(data, ..., stats_to_calculate = NULL, .select_function
 
   data
 }
+
+utils::globalVariables(c("where"))
