@@ -1,6 +1,6 @@
 Package: statHelper
 Type: Package
-Title: Functions to help with mainly statistical evaluation of data
+Title: Functions to help mainly with statistical evaluation of data
 Version: 0.1.1
 Authors@R: 
     person(given = "Jan",
@@ -8,7 +8,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jan.caha@outlook.com",
            comment = c(ORCID = "0000-0003-0165-0606"))
-Description: Functions to help with mainly statistical evaluation of data
+Description: Functions to help with mainly statistical evaluation of data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -23,5 +23,8 @@ Imports:
   stringr,
   tibble,
   ggplot2,
-  magrittr
+  magrittr,
+  broom
+Suggests:
+  testthat
 RoxygenNote: 7.1.2
