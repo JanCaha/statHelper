@@ -33,5 +33,4 @@ data("diamonds")
 ds_stats <- stats_numeric(diamonds)
 stats_to_calculate <- list(n = ~ n(), mean = ~ mean(.x, na.rm = TRUE), sd = ~ sd(.x, na.rm = TRUE))
 ds_stats <- stats_numeric(diamonds, stats_to_calculate = stats_to_calculate)
-
 }

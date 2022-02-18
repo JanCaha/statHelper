@@ -18,5 +18,4 @@ Find function in package
 \examples{
 package_name <- find_function_in_package(t.test)
 package_name <- find_function_in_package("t.test")
-
 }
