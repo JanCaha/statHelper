@@ -1,0 +1,29 @@
+on:
+  push:
+    paths:
+      - R/**
+      - DESCRIPTION
+      - .github/workflows/R-CMD-check.yaml
+
+name: R-CMD-check
+
+jobs:
+
+  R-CMD-check:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v1
+
+      - uses: r-lib/actions/setup-r@master
+
+      - uses: r-lib/actions/setup-tinytex@master
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache-version: 2
+          extra-packages: rcmdcheck
+
+      - uses: r-lib/actions/check-r-package@v2
