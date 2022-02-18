@@ -12,6 +12,7 @@
 #' @importFrom rlang englue is_function is_character abort
 #' @importFrom stringr str_detect str_split
 #' @importFrom glue glue
+#' @importFrom utils getAnywhere
 #'
 find_function_in_package <- function(f){
 
@@ -31,7 +32,7 @@ find_function_in_package <- function(f){
   }
 
   if (rlang::is_character(f)) {
-    func <- getAnywhere(f)
+    func <- utils::getAnywhere(f)
   } else {
     rlang::abort(glue::glue("Parameter `f` of uknown type `{class(f)}`."))
   }
