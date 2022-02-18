@@ -24,6 +24,19 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           cache-version: 2
-          extra-packages: rcmdcheck
+          extra-packages: rcmdcheck, devtools
+
+      - name: Document package
+        run: |
+          devtools::document(roclets = c('rd', 'collate', 'namespace', 'vignette'))
+        shell: Rscript {0}
+
+      - uses: EndBug/add-and-commit@v7.2.0
+        with:
+          default_author: github_actions
+          message: "current update"
+          pull_strategy: 'NO-PULL'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: r-lib/actions/check-r-package@v2
