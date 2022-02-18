@@ -1,30 +1,30 @@
-Package: statHelper
 Type: Package
+Package: statHelper
 Title: Functions to Help with Statistical Evaluation of Data
 Version: 0.1.1
 Authors@R: 
-    person(given = "Jan",
-           family = "Caha",
-           role = c("aut", "cre"),
-           email = "jan.caha@outlook.com",
+    person("Jan", "Caha", , "jan.caha@outlook.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0165-0606"))
 Description: Functions to help with mainly statistical evaluation of data.
 License: MIT + file LICENSE
+Imports: 
+    broom,
+    dplyr,
+    generics,
+    ggplot2,
+    glue,
+    lifecycle,
+    magrittr,
+    purrr,
+    rlang,
+    stringr,
+    tibble,
+    tidyr,
+    tidyselect,
+    withr
+Suggests:
+    testthat
 Encoding: UTF-8
 LazyData: true
-Imports: 
-  rlang,
-  generics,
-  purrr,
-  dplyr,
-  tidyr,
-  tidyselect,
-  glue,
-  stringr,
-  tibble,
-  ggplot2,
-  magrittr,
-  broom
-Suggests:
-  testthat
 RoxygenNote: 7.1.2
+Roxygen: list(markdown = TRUE)
