@@ -1,0 +1,27 @@
+Package: statHelper
+Type: Package
+Title: Functions to help with mainly statistical evaluation of data
+Version: 0.1.0
+Authors@R: 
+    person(given = "Jan",
+           family = "Caha",
+           role = c("aut", "cre"),
+           email = "jan.caha@outlook.com",
+           comment = c(ORCID = "0000-0003-0165-0606"))
+Description: Functions to help with mainly statistical evaluation of data
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+  rlang,
+  generics,
+  purrr,
+  dplyr,
+  tidyr,
+  tidyselect,
+  glue,
+  stringr,
+  tibble,
+  ggplot2,
+  magrittr
+RoxygenNote: 7.1.2
