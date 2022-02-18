@@ -35,7 +35,6 @@ jobs:
         with:
           default_author: github_actions
           message: "current update"
-          pull_strategy: 'NO-PULL'
 
       - uses: r-lib/actions/check-r-package@v2
 
