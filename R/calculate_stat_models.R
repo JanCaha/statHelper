@@ -8,15 +8,21 @@
 #' @return Data frame with results of function for each model.
 #' @export
 #'
+#' @importFrom rlang is_formula abort
+#' @importFrom purrr map_lgl map_df
+#' @importFrom dplyr mutate
+#' @importFrom broom tidy
+#'
 #' @examples
 #' library(ggplot2)
+#' library(dplyr)
 #' data(diamonds)
 #' diamonds <- diamonds %>%
 #'   filter(color %in% c("D", "E"))
 #' models <- list(carat ~ color,
 #'                depth ~ color,
 #'                x ~ color)
-#' calculate_stat_models(models, diamonds, t.test, alternative = "less")
+#' calculate_stat_models(diamonds, models, t.test)
 #'
 calculate_stat_models <- function(dataset, models, fun, ...){
 
@@ -34,7 +40,7 @@ calculate_stat_models <- function(dataset, models, fun, ...){
     name = name[3]
   }
 
-  map_df(models, .calculate_stat, dataset=dataset, fun=fun, fun_name = name, ...)
+  purrr::map_df(models, .calculate_stat, dataset=dataset, fun=fun, fun_name = name, ...)
 
 }
 

@@ -1,6 +1,8 @@
 test_that("calculate_stat_models function", {
 
   library(ggplot2)
+  library(dplyr)
+
   data(diamonds)
 
   diamonds <- diamonds %>%
@@ -34,6 +36,8 @@ test_that("calculate_stat_models function", {
 test_that("calculate_stat_models function error", {
 
   library(ggplot2)
+  library(dplyr)
+
   data(diamonds)
 
   diamonds <- diamonds %>%
