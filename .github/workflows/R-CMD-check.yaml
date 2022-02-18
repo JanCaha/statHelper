@@ -31,13 +31,11 @@ jobs:
           devtools::document(roclets = c('rd', 'collate', 'namespace', 'vignette'))
         shell: Rscript {0}
 
-      - uses: EndBug/add-and-commit@v7.2.0
+      - uses: EndBug/add-and-commit@v8.0.2
         with:
           default_author: github_actions
           message: "current update"
           pull_strategy: 'NO-PULL'
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
 
       - uses: r-lib/actions/check-r-package@v2
 
