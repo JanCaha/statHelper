@@ -1,7 +1,7 @@
 Package: statHelper
 Type: Package
 Title: Functions to help with mainly statistical evaluation of data
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "Jan",
            family = "Caha",
