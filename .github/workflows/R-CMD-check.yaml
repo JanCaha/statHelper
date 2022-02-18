@@ -37,6 +37,6 @@ jobs:
           message: "current update"
           pull_strategy: 'NO-PULL'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
 
       - uses: r-lib/actions/check-r-package@v2
