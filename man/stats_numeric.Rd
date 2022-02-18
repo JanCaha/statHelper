@@ -16,9 +16,9 @@ stats_numeric(
 
 \item{...}{Grouping variables to be applied before calculation.}
 
-\item{stats_to_calculate}{List of statistics function to calculate. Default value is `NULL` which means that standard functions (n, mean, sd, median, iqr, min and max) are calculate.}
+\item{stats_to_calculate}{List of statistics function to calculate. Default value is \code{NULL} which means that standard functions (n, mean, sd, median, iqr, min and max) are calculate.}
 
-\item{.select_function}{Function used to select data columns for which the stats will be calculated. Default value is `is.numeric`.}
+\item{.select_function}{Function used to select data columns for which the stats will be calculated. Default value is \code{is.numeric}.}
 }
 \value{
 Data frame containing stats.

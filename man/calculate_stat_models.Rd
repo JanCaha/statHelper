@@ -13,7 +13,7 @@ calculate_stat_models(dataset, models, fun, ...)
 
 \item{fun}{Function to calculate (i.e. t.test).}
 
-\item{...}{Parameters passed to `fun`.}
+\item{...}{Parameters passed to \code{fun}.}
 }
 \value{
 Data frame with results of function for each model.

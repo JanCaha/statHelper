@@ -11,7 +11,7 @@ stats_frequency(data, ..., .select_function = is.factor)
 
 \item{...}{Grouping variables to be applied before calculation.}
 
-\item{.select_function}{Function used to select data columns for which the stats will be calculated. Default value is `is.factor`.}
+\item{.select_function}{Function used to select data columns for which the stats will be calculated. Default value is \code{is.factor}.}
 }
 \value{
 Data frame containing stats.
