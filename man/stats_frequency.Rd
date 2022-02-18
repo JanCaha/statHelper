@@ -24,5 +24,4 @@ library(ggplot2)
 data("diamonds")
 ds_stats <- stats_frequency(diamonds)
 ds_stats <- stats_frequency(diamonds, color)
-
 }
