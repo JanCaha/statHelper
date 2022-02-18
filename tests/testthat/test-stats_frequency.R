@@ -1,5 +1,4 @@
 test_that("stats_frequency function", {
-
   library(ggplot2)
   data(diamonds)
 

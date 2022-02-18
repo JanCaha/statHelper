@@ -17,9 +17,7 @@
 #' data("diamonds")
 #' ds_stats <- stats_frequency(diamonds)
 #' ds_stats <- stats_frequency(diamonds, color)
-#'
 stats_frequency <- function(data, ..., .select_function = is.factor) {
-
   n_rows <- nrow(data)
 
   vars_groupped <- rlang::quos(...) %>%
@@ -30,8 +28,8 @@ stats_frequency <- function(data, ..., .select_function = is.factor) {
 
   selected_variables <- c()
 
-  for (col_name in col_names){
-    if (.select_function(data[[col_name]])){
+  for (col_name in col_names) {
+    if (.select_function(data[[col_name]])) {
       selected_variables <- c(selected_variables, col_name)
     }
   }
@@ -41,33 +39,30 @@ stats_frequency <- function(data, ..., .select_function = is.factor) {
   stat_data <- tibble::tibble()
 
   for (selected_variable in selected_variables) {
-
     vars_groupped_local <- rlang::syms(c(vars_groupped, selected_variable))
 
-    if (!is.null(vars_groupped)){
+    if (!is.null(vars_groupped)) {
       data_counts <- data %>%
-        dplyr::group_by(!!! rlang::syms(c(vars_groupped))) %>%
+        dplyr::group_by(!!!rlang::syms(c(vars_groupped))) %>%
         dplyr::summarize(total = dplyr::n())
     }
 
     data_local <- data %>%
-      dplyr::group_by(!!! vars_groupped_local)
+      dplyr::group_by(!!!vars_groupped_local)
 
     suppressMessages({
-
       data_local <- data_local %>%
         dplyr::summarise(n = length(dplyr::cur_group_rows()))
 
       if (!is.null(vars_groupped)) {
         data_local <- data_local %>%
           dplyr::left_join(data_counts) %>%
-          dplyr::mutate(freq = (n/.data$total) * 100) %>%
+          dplyr::mutate(freq = (n / .data$total) * 100) %>%
           dplyr::select(-.data$total)
       } else {
         data_local <- data_local %>%
-          dplyr::mutate(freq = (n/n_rows) * 100)
+          dplyr::mutate(freq = (n / n_rows) * 100)
       }
-
     })
 
     data_local <- data_local %>%
@@ -76,7 +71,7 @@ stats_frequency <- function(data, ..., .select_function = is.factor) {
       dplyr::mutate(value = as.character(.data$value))
 
 
-    if (nrow(stat_data) == 0){
+    if (nrow(stat_data) == 0) {
       stat_data <- data_local
     } else {
       stat_data <- dplyr::bind_rows(stat_data, data_local)
@@ -85,4 +80,3 @@ stats_frequency <- function(data, ..., .select_function = is.factor) {
 
   stat_data
 }
-
