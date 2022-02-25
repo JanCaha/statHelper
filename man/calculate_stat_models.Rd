@@ -27,10 +27,9 @@ library(dplyr)
 data(diamonds)
 diamonds <- diamonds \%>\%
   filter(color \%in\% c("D", "E"))
-models <- list(
-  carat ~ color,
-  depth ~ color,
-  x ~ color
-)
+models <- list(carat ~ color,
+               depth ~ color,
+               x ~ color)
 calculate_stat_models(diamonds, models, t.test)
+
 }
