@@ -19,36 +19,36 @@
 #' data(diamonds)
 #' diamonds <- diamonds %>%
 #'   filter(color %in% c("D", "E"))
-#' models <- list(carat ~ color,
-#'                depth ~ color,
-#'                x ~ color)
+#' models <- list(
+#'   carat ~ color,
+#'   depth ~ color,
+#'   x ~ color
+#' )
 #' calculate_stat_models(diamonds, models, t.test)
-#'
-calculate_stat_models <- function(dataset, models, fun, ...){
-
-  if (rlang::is_formula(models)){
-    models = list(models)
+calculate_stat_models <- function(dataset, models, fun, ...) {
+  if (rlang::is_formula(models)) {
+    models <- list(models)
   }
 
-  if (!all(purrr::map_lgl(models, rlang::is_formula))){
+  if (!all(purrr::map_lgl(models, rlang::is_formula))) {
     rlang::abort("Every element of `models` must be a formula.")
   }
 
   name <- as.character(substitute(fun))
 
-  if (length(name) == 3){
-    name = name[3]
+  if (length(name) == 3) {
+    name <- name[3]
   }
 
-  purrr::map_df(models, .calculate_stat, dataset=dataset, fun=fun, fun_name = name, ...)
-
+  purrr::map_df(models, .calculate_stat, dataset = dataset, fun = fun, fun_name = name, ...)
 }
 
-.calculate_stat <- function(model, dataset, fun, fun_name, ...){
-
-  fun(model, data=dataset, ...) %>%
+.calculate_stat <- function(model, dataset, fun, fun_name, ...) {
+  fun(model, data = dataset, ...) %>%
     broom::tidy() %>%
-    dplyr::mutate(model = Reduce(paste, deparse(model)),
-                  func = fun_name,
-                  .before = 1)
+    dplyr::mutate(
+      model = Reduce(paste, deparse(model)),
+      func = fun_name,
+      .before = 1
+    )
 }

@@ -15,8 +15,7 @@
 #' @importFrom tidyselect eval_select
 #'
 #' @examples
-#'df_corrs <- correlations_per_group(mtcars, wt, qsec, group_var = cyl)
-#'
+#' df_corrs <- correlations_per_group(mtcars, wt, qsec, group_var = cyl)
 correlations_per_group <- function(.data, ..., group_var = NULL) {
   dots <- rlang::quos(...)
 
@@ -24,18 +23,22 @@ correlations_per_group <- function(.data, ..., group_var = NULL) {
 
   no_group_var <- TRUE
 
-  rlang::try_fetch({
+  rlang::try_fetch(
+    {
       selection_eval <- tidyselect::eval_select(rlang::enquo(group_var), .data)
-      if (0 < length(selection_eval)){
+      if (0 < length(selection_eval)) {
         no_group_var <- FALSE
       }
     },
-    error = function(cnd){
+    error = function(cnd) {
       variable <- rlang::as_label(rlang::enquo(group_var))
       rlang::abort(c("Cannot use functions correctly.",
-                     "x" = glue::glue("Column `{variable}` not found in `.data`.")),
-                   parent = cnd)
-    })
+        "x" = glue::glue("Column `{variable}` not found in `.data`.")
+      ),
+      parent = cnd
+      )
+    }
+  )
 
   .check_variables_exist(.data, ..., .input_data_name = data_name)
 
@@ -53,7 +56,6 @@ correlations_per_group <- function(.data, ..., group_var = NULL) {
   }
 
   if (no_group_var) {
-
     rlang::inform("No grouping variable selected, calculating for all elements together.")
 
     complete_corr_table <- correlation::correlation(data) %>%
