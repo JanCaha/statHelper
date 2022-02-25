@@ -21,7 +21,8 @@ Imports:
     tibble,
     tidyr,
     tidyselect,
-    withr
+    withr,
+    correlation
 Suggests:
     testthat
 Encoding: UTF-8
