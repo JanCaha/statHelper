@@ -21,5 +21,4 @@ Calculate correlation for selected variables in groups
 }
 \examples{
 df_corrs <- correlations_per_group(mtcars, wt, qsec, group_var = cyl)
-
 }
